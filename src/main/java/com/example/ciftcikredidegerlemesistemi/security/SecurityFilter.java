@@ -1,4 +1,4 @@
-package com.example.ciftcikredidegerlemesistemi.Security;
+package com.example.ciftcikredidegerlemesistemi.security;
 import io.micrometer.common.util.StringUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -21,8 +21,6 @@ public class SecurityFilter extends OncePerRequestFilter {
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
             return;
         }
-
         filterChain.doFilter(request, response);
     }
-
 }
