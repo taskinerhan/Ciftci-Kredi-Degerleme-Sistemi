@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @Component
@@ -20,51 +22,25 @@ public class HayvansalDegerCronJob {
     private HayvanIrkRepository hayvanIrkRepository;
     @Scheduled(cron = "0 0/5 0-12 * * ?")
     public void ekleHayvansalDegerCronJob(){
-        List<HayvanIrk> hayvanIrkList = hayvanIrkRepository.findAll();
-        boolean erkekDurum ;
-        boolean disiDurum ;
-        for (HayvanIrk hayvanIrk : hayvanIrkList) {
-            List<HayvansalVarlikDeger> hayvansalVarlikDegerList = hayvansalVarlikRepository.findByHayvanIrk(hayvanIrk);
-            if(!hayvansalVarlikDegerList.isEmpty()){
-                for (HayvansalVarlikDeger hayvansalVarlikDeger : hayvansalVarlikDegerList) {
-                    erkekDurum = false;
-                    disiDurum = false;
-                    if (hayvansalVarlikDeger.getCinsiyet() == Cinsiyet.Erkek) {
-                        erkekDurum = true;
-                    } else if (hayvansalVarlikDeger.getCinsiyet() == Cinsiyet.Disi) {
-                        disiDurum = true;
-                    }
-                    if (!erkekDurum) {
-                        HayvansalVarlikDeger erkekDeger = new HayvansalVarlikDeger();
-                        erkekDeger.setCinsiyet(Cinsiyet.Erkek);
-                        erkekDeger.setDeger(BigDecimal.ZERO);
-                        erkekDeger.setHayvanIrk(hayvanIrk);
-                        hayvansalVarlikRepository.save(erkekDeger);
-                    }
-                    if (!disiDurum) {
-                        HayvansalVarlikDeger disiDeger = new HayvansalVarlikDeger();
-                        disiDeger.setCinsiyet(Cinsiyet.Disi);
-                        disiDeger.setDeger(BigDecimal.ZERO);
-                        disiDeger.setHayvanIrk(hayvanIrk);
-                        hayvansalVarlikRepository.save(disiDeger);
-                    }
-                }
+       List<HayvanIrk> hayvanIrkList = hayvanIrkRepository.findAll();
+
+       for(HayvanIrk hayvanIrk:hayvanIrkList){
+           List<HayvansalVarlikDeger> hayvansalVarlikDegerList =hayvansalVarlikRepository.findByHayvanIrk(hayvanIrk);
+
+           Set<Cinsiyet> cinsiyetSet = hayvansalVarlikDegerList.stream()
+                   .map(HayvansalVarlikDeger::getCinsiyet)
+                   .collect(Collectors.toSet());
+
+           for(Cinsiyet cinsiyet:Cinsiyet.values()){
+               if(Cinsiyet.Tumu.equals(cinsiyet)) continue;
+            if(cinsiyetSet.contains(cinsiyet)){
+                HayvansalVarlikDeger hayvansalVarlikDeger = new HayvansalVarlikDeger();
+                hayvansalVarlikDeger.setCinsiyet(cinsiyet);
+                hayvansalVarlikDeger.setDeger(BigDecimal.ZERO);
+                hayvansalVarlikDeger.setHayvanIrk(hayvanIrk);
+                hayvansalVarlikRepository.save(hayvansalVarlikDeger);
             }
-            else{
-                HayvansalVarlikDeger erkekDeger = new HayvansalVarlikDeger();
-                erkekDeger.setCinsiyet(Cinsiyet.Erkek);
-                erkekDeger.setDeger(BigDecimal.ZERO);
-                erkekDeger.setHayvanIrk(hayvanIrk);
-                hayvansalVarlikRepository.save(erkekDeger);
-
-                HayvansalVarlikDeger disiDeger = new HayvansalVarlikDeger();
-                disiDeger.setCinsiyet(Cinsiyet.Disi);
-                disiDeger.setDeger(BigDecimal.ZERO);
-                disiDeger.setHayvanIrk(hayvanIrk);
-                hayvansalVarlikRepository.save(disiDeger);
-            }
-        }
-
-
+           }
+       }
     }
 }
