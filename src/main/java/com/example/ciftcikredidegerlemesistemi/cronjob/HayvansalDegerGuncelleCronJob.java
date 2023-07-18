@@ -1,7 +1,6 @@
-package com.example.ciftcikredidegerlemesistemi.CronJob;
-import com.example.ciftcikredidegerlemesistemi.Entity.HayvansalVarlikDeger;
-import com.example.ciftcikredidegerlemesistemi.Repository.HayvansalVarlikRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+package com.example.ciftcikredidegerlemesistemi.cronjob;
+import com.example.ciftcikredidegerlemesistemi.entity.HayvansalVarlikDeger;
+import com.example.ciftcikredidegerlemesistemi.repository.HayvansalVarlikRepository;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -10,8 +9,12 @@ import java.util.List;
 import java.util.Random;
 @Component
 public class HayvansalDegerGuncelleCronJob {
-    @Autowired
-    private HayvansalVarlikRepository hayvansalVarlikRepository;
+    private final HayvansalVarlikRepository hayvansalVarlikRepository;
+
+    public HayvansalDegerGuncelleCronJob(HayvansalVarlikRepository hayvansalVarlikRepository) {
+        this.hayvansalVarlikRepository = hayvansalVarlikRepository;
+    }
+
     @Scheduled(cron = "0 0/5 * * * ?")
     public void guncelleHayvansalVarlikDeger() {
         Random random = new Random();

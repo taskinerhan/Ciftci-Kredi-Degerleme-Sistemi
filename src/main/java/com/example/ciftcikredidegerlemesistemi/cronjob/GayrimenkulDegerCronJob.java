@@ -1,9 +1,8 @@
-package com.example.ciftcikredidegerlemesistemi.CronJob;
+package com.example.ciftcikredidegerlemesistemi.cronjob;
 
-import com.example.ciftcikredidegerlemesistemi.Entity.GayrimenkulTipi;
-import com.example.ciftcikredidegerlemesistemi.Entity.GayrimenkulVarlikDeger;
-import com.example.ciftcikredidegerlemesistemi.Repository.GayrimenkulVarlikRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.ciftcikredidegerlemesistemi.enums.GayrimenkulTipi;
+import com.example.ciftcikredidegerlemesistemi.entity.GayrimenkulVarlikDeger;
+import com.example.ciftcikredidegerlemesistemi.repository.GayrimenkulVarlikRepository;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +10,6 @@ import java.math.BigDecimal;
 
 @Component
 public class GayrimenkulDegerCronJob {
-    @Autowired
     private final GayrimenkulVarlikRepository gayrimenkulVarlikRepository;
 
     public GayrimenkulDegerCronJob(GayrimenkulVarlikRepository gayrimenkulVarlikRepository) {
