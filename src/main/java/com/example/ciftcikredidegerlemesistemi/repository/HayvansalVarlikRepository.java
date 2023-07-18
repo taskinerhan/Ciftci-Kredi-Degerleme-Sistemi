@@ -1,7 +1,7 @@
-package com.example.ciftcikredidegerlemesistemi.Repository;
-import com.example.ciftcikredidegerlemesistemi.Entity.Cinsiyet;
-import com.example.ciftcikredidegerlemesistemi.Entity.HayvanIrk;
-import com.example.ciftcikredidegerlemesistemi.Entity.HayvansalVarlikDeger;
+package com.example.ciftcikredidegerlemesistemi.repository;
+import com.example.ciftcikredidegerlemesistemi.enums.Cinsiyet;
+import com.example.ciftcikredidegerlemesistemi.entity.HayvanIrk;
+import com.example.ciftcikredidegerlemesistemi.entity.HayvansalVarlikDeger;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

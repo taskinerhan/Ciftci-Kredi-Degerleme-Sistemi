@@ -1,6 +1,6 @@
-package com.example.ciftcikredidegerlemesistemi.Repository;
+package com.example.ciftcikredidegerlemesistemi.repository;
 
-import com.example.ciftcikredidegerlemesistemi.Entity.HayvanIrk;
+import com.example.ciftcikredidegerlemesistemi.entity.HayvanIrk;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
