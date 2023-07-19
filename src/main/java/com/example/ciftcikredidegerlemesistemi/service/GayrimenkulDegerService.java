@@ -3,9 +3,9 @@ package com.example.ciftcikredidegerlemesistemi.service;
 import com.example.ciftcikredidegerlemesistemi.entity.GayrimenkulVarlikDeger;
 import com.example.ciftcikredidegerlemesistemi.enums.GayrimenkulTipi;
 import com.example.ciftcikredidegerlemesistemi.repository.GayrimenkulVarlikRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Random;
@@ -17,6 +17,7 @@ public class GayrimenkulDegerService {
     public GayrimenkulDegerService(GayrimenkulVarlikRepository gayrimenkulVarlikRepository) {
         this.gayrimenkulVarlikRepository = gayrimenkulVarlikRepository;
     }
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void ekleGayrimenkulDegeri(){
         GayrimenkulTipi[] gayrimenkulTipleri = GayrimenkulTipi.values();
         for (GayrimenkulTipi tip : gayrimenkulTipleri) {
@@ -28,6 +29,7 @@ public class GayrimenkulDegerService {
             }
         }
     }
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public  void guncelleGayrimenkulDeger()
     {
         Random random = new Random();
@@ -38,6 +40,5 @@ public class GayrimenkulDegerService {
             gayrimenkulVarlikRepository.save(varlik);
         }
     }
-
 
 }

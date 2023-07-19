@@ -17,6 +17,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
+
 public class HayvansalDegerService {
     private final HayvansalVarlikRepository hayvansalVarlikRepository;
     private final HayvanIrkRepository hayvanIrkRepository;
@@ -25,7 +26,7 @@ public class HayvansalDegerService {
         this.hayvansalVarlikRepository = hayvansalVarlikRepository;
         this.hayvanIrkRepository = hayvanIrkRepository;
     }
-
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void ekleHayvansalDegerCronJob() {
         List<HayvanIrk> hayvanIrkList = hayvanIrkRepository.findAll();
 
@@ -48,7 +49,7 @@ public class HayvansalDegerService {
             }
         }
     }
-
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void guncelleHayvansalVarlikDeger() {
         Random random = new Random();
         List<HayvansalVarlikDeger> hayvansalVarlikDegerList = hayvansalVarlikRepository.findAll();
