@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface GayrimenkulVarlikRepository extends JpaRepository<GayrimenkulVarlikDeger,Long> {
-    GayrimenkulVarlikDeger findByGayrimenkulTipi(@Param("gayrimenkulTipi") GayrimenkulTipi gayrimenkulTipi);
+    GayrimenkulVarlikDeger findByGayrimenkulTipi(GayrimenkulTipi gayrimenkulTipi);
 }
 
