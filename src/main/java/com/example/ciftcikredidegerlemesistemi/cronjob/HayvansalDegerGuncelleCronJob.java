@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class HayvansalDegerGuncelleCronJob {
     private final HayvansalDegerService hayvansalDegerService;
 
-    @Scheduled(cron = "0 0/5 * * * ?")
+    @Scheduled(cron = "0 0/5 0-12 * * ?")
     public void guncelleHayvansalVarlikDeger() {
         hayvansalDegerService.guncelleHayvansalVarlikDeger();
 

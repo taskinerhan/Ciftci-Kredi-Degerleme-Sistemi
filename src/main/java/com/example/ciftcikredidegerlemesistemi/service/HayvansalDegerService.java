@@ -6,6 +6,7 @@ import com.example.ciftcikredidegerlemesistemi.enums.Cinsiyet;
 import com.example.ciftcikredidegerlemesistemi.repository.HayvanIrkRepository;
 import com.example.ciftcikredidegerlemesistemi.repository.HayvansalVarlikRepository;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,15 +18,11 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-
+@RequiredArgsConstructor
 public class HayvansalDegerService {
     private final HayvansalVarlikRepository hayvansalVarlikRepository;
     private final HayvanIrkRepository hayvanIrkRepository;
 
-    public HayvansalDegerService(HayvansalVarlikRepository hayvansalVarlikRepository, HayvanIrkRepository hayvanIrkRepository) {
-        this.hayvansalVarlikRepository = hayvansalVarlikRepository;
-        this.hayvanIrkRepository = hayvanIrkRepository;
-    }
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void ekleHayvansalDegerCronJob() {
         List<HayvanIrk> hayvanIrkList = hayvanIrkRepository.findAll();
@@ -53,7 +50,7 @@ public class HayvansalDegerService {
     public void guncelleHayvansalVarlikDeger() {
         Random random = new Random();
         List<HayvansalVarlikDeger> hayvansalVarlikDegerList = hayvansalVarlikRepository.findAll();
-        for(HayvansalVarlikDeger hayvansalVarlikDeger: hayvansalVarlikDegerList) {
+        for (HayvansalVarlikDeger hayvansalVarlikDeger : hayvansalVarlikDegerList) {
             int randomDeger = random.nextInt(1000000);
             hayvansalVarlikDeger.setDeger(new BigDecimal(randomDeger));
             hayvansalVarlikRepository.save(hayvansalVarlikDeger);

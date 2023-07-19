@@ -9,8 +9,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class HayvansalDegerCronJob {
     private final HayvansalDegerService hayvansalDegerService;
-
-    @Scheduled(cron = "0 0/1 * * * ?")
+    @Scheduled(cron = "0 0/5 0-12 * * ?")
     public void ekleHayvansalDegerCronJob() {
        hayvansalDegerService.ekleHayvansalDegerCronJob();
     }

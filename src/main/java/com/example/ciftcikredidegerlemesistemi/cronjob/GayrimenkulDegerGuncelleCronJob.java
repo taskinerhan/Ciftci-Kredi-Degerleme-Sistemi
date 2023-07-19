@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class GayrimenkulDegerGuncelleCronJob {
     private final GayrimenkulDegerService gayrimenkulDegerService;
 
-    @Scheduled(cron = "0 0/5 * * * ?")
+    @Scheduled(cron = "0 0/5 0-12 * * ?")
     public void guncelleGayrimenkulDeger() {
         gayrimenkulDegerService.guncelleGayrimenkulDeger();
 

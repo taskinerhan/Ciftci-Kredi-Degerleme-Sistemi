@@ -2,6 +2,7 @@ package com.example.ciftcikredidegerlemesistemi.controller;
 import com.example.ciftcikredidegerlemesistemi.enums.Cinsiyet;
 import com.example.ciftcikredidegerlemesistemi.entity.HayvansalVarlikDeger;
 import com.example.ciftcikredidegerlemesistemi.repository.HayvansalVarlikRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,12 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
+@RequiredArgsConstructor
 public class HayvanVarlikController {
     private final HayvansalVarlikRepository hayvansalVarlikRepository;
 
-    public HayvanVarlikController(HayvansalVarlikRepository hayvansalVarlikRepository) {
-        this.hayvansalVarlikRepository = hayvansalVarlikRepository;
-    }
 
     @GetMapping("/hayvansal-varlik-deger-yonetimi/{hayvanIrkId}/{cinsiyet}")
     public ResponseEntity<?> HayvansalVarlikDeger(@PathVariable(name="hayvanIrkId") Long hayvanIrkId, @PathVariable(name="cinsiyet")Cinsiyet cinsiyet) {
